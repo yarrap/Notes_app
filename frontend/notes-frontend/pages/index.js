@@ -128,7 +128,7 @@ export default function Home() {
   ];
 
   const getCategoryCount = (catName) => notes.filter(n => n.category === catName).length;
-  const sortedNotes = [...notes].sort((a,b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+  const sortedNotes = [...notes].sort((a,b) => new Date(b.modified_at || b.created_at || 0) - new Date(a.modified_at || a.created_at || 0));
   const filteredNotes = selectedCategory && selectedCategory !== "All Categories" ? sortedNotes.filter(n => n.category === selectedCategory) : sortedNotes;
 
   const getCardColor = (cat) => ({
