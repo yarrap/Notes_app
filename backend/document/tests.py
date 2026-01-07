@@ -24,7 +24,7 @@ class NoteModelTest(TestCase):
         self.user = User.objects.create_user(username="testuser", password="testpass")
 
     def test_create_note_model(self):
-        # Create a new note for this user
+        """Test creating a note and validate timestamps and fields."""
         note = Note.objects.create(
             title="Test Note",
             content="Some content",
@@ -52,7 +52,7 @@ class NoteModelTest(TestCase):
         self.assertNotEqual(note.modified_at, old_modified_at)
 
     def test_note_api_modified_at(self):
-        # Same thing, just testing API logic
+        """Test that modified_at updates correctly when a note is updated."""
         note = Note.objects.create(
             title="API Note",
             content="API Content",
