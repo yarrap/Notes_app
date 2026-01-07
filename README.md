@@ -5,6 +5,23 @@ A Note Taking application built with **Django** (backend) and **Next.js** (front
 
 ---
 
+## App Screenshot
+
+### Login Page:
+![Alt text](pictures/image-4.png)
+
+### Registration Page:
+![Alt text](pictures/image-1.png)
+
+### Main Page:
+![Alt text](pictures/image-2.png)
+
+### Single Note Page:
+![Alt text](pictures/image-3.png)
+
+
+---
+
 ## Table of Contents
 
 1. [Features](#features)  
@@ -128,7 +145,7 @@ python manage.py runserver
 2. Start the **frontend**:
 
 ```bash
-cd frontend
+cd frontend/notes-frontend
 npm run dev
 ```
 
@@ -145,4 +162,13 @@ npm run dev
 ```bash
 pip freeze > backend/requirements.txt
 ```
+
+---
+
+## AI Usage
+
+For the **backend**, all major logic, including Django models, serializers, views, and API endpoints, was **developed and structured by me** by referencing official Django documentation and other online resources. I used AI (Claude) and gpt to **suggest improvements, optimizations, and minor code modifications**, all of which I carefully reviewed and adapted before integrating into the project.
+
+For the **frontend**, I used AI (Claude) to help generate Next.js components and understand how to integrate them with the Django backend. All AI suggestions were carefully reviewed and manually adjusted to ensure they work correctly.
+
 
