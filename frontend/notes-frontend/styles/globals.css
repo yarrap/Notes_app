@@ -1,0 +1,13 @@
+/* 
+  Global CSS for the Notes App frontend.
+
+  - Resets default body margin to 0 for consistent layout.
+  - Sets a default font-family (Arial, sans-serif) for all text across the app.
+*/
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
