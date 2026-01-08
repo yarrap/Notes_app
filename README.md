@@ -31,7 +31,9 @@ A full-stack note-taking application built with **Django** (backend) and **Next.
 6. [Folder Structure](#folder-structure)
 7. [Development Process](#development-process)
 8. [Key Design & Technical Decisions](#key-design--technical-decisions)
-9. [AI Tools Usage](#ai-tools-usage)
+9. [Testing Strategy](#testing-strategy)
+10. [AI Tools Usage](#ai-tools-usage)
+
 
 ---
 
@@ -309,6 +311,49 @@ Notes_app/
 
 - Fetch API to connect frontend with Django backend
 - CSRF token handling for secure requests
+
+---
+
+---
+
+## Testing Strategy
+
+This project includes a comprehensive backend test suite built using **Django TestCase** and **Django REST Framework’s APITestCase** to ensure correctness, reliability, and maintainability of the application.
+
+### Test Coverage Overview
+
+The test suite focuses on validating real-world usage scenarios and enforcing strict data integrity:
+
+- **Model Tests**
+  - Note creation with required and default fields
+  - Category validation and choices
+  - User–note relationship integrity
+  - String representation (`__str__`)
+  - Automatic timestamp handling (`created_at`, `modified_at`)
+  - Update and deletion behavior
+  - Ordering guarantees
+
+- **Authentication Tests**
+  - User registration
+  - Successful login
+  - Authentication failure for invalid credentials
+
+- **Permissions & Data Isolation**
+  - Ensures users can only access their own notes
+  - Verifies complete isolation between users’ data
+
+- **Filtering Logic**
+  - Category-based filtering (personal, school, random, drama)
+
+- **API-Level Validation**
+  - Authenticated API access using DRF test utilities
+  - Verification of user-scoped note access
+
+### Running Tests
+
+```bash
+python manage.py test
+```
 
 ---
 
