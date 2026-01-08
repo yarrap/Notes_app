@@ -1,26 +1,23 @@
 # Notes App
 
-A Note Taking application built with **Django** (backend) and **Next.js** (frontend) that allows users to create, update, and delete notes with categories. This project also handles user authentication.
+A full-stack note-taking application built with **Django** (backend) and **Next.js** (frontend) that allows users to create, update, and delete notes with categories. This project features user authentication, a RESTful API, and a responsive UI.
+
 
 ---
 
 ## App Screenshots
 
 ### Login Page:
-
-![Alt text](pictures/image-4.png)
+![Login Page](pictures/image-4.png)
 
 ### Registration Page:
-
-![Alt text](pictures/image-1.png)
+![Registration Page](pictures/image-1.png)
 
 ### Main Page:
-
-![Alt text](pictures/image-2.png)
+![Main Page](pictures/image-2.png)
 
 ### Single Note Page:
-
-![Alt text](pictures/image-3.png)
+![Single Note Page](pictures/image-3.png)
 
 ---
 
@@ -32,29 +29,40 @@ A Note Taking application built with **Django** (backend) and **Next.js** (front
 4. [Setup Instructions](#setup-instructions)
 5. [Running the Project](#running-the-project)
 6. [Folder Structure](#folder-structure)
-7. [Summary & Design Decisions](#summary--design-decisions)
-8. [AI Usage](#ai-usage)
-9. [Notes](#notes)
+7. [Development Process](#development-process)
+8. [Key Design & Technical Decisions](#key-design--technical-decisions)
+9. [AI Tools Usage](#ai-tools-usage)
 
 ---
 
 ## Features
 
-* User registration and login
-* Add, edit, and delete notes
-* Categorize notes (Random Thoughts, School, Personal)
-* Filter notes by category
-* Responsive frontend with Next.js
-* Backend API with Django REST Framework
+* ✅ User registration and login
+* ✅ Add, edit, and delete notes
+* ✅ Categorize notes (Random Thoughts, School, Personal)
+* ✅ Filter notes by category
+* ✅ Responsive frontend with Next.js
+* ✅ RESTful API with Django REST Framework
+* ✅ CSRF protection for secure form submissions
 
 ---
 
 ## Technologies
 
-* **Backend:** Django, Django REST Framework
-* **Frontend:** Next.js, React
-* **Database:** SQLite (default, can switch to PostgreSQL)
-* **Other:** Fetch API, CSRF token handling
+**Backend:**
+* Django 4.x
+* Django REST Framework
+* SQLite (default) / PostgreSQL support
+
+**Frontend:**
+* Next.js 14
+* React 18
+* Tailwind CSS
+* Fetch API for HTTP requests
+
+**Authentication:**
+* Django's built-in session authentication
+* CSRF token handling
 
 ---
 
@@ -81,17 +89,25 @@ cd Notes_app
 
 #### a) Create a Python virtual environment
 
+**Important:** Make sure you're in the `Notes_app` root directory.
+
 ```bash
-python -m venv env
+python3 -m venv env
 ```
 
 #### b) Activate the virtual environment
 
-* **Mac/Linux:**
-
+**Mac/Linux:**
 ```bash
 source env/bin/activate
 ```
+
+**Windows:**
+```bash
+env\Scripts\activate
+```
+
+You should see `(env)` appear at the beginning of your terminal prompt.
 
 #### c) Install dependencies
 
@@ -99,7 +115,7 @@ source env/bin/activate
 pip install -r backend/requirements.txt
 ```
 
-#### d) Apply migrations
+#### d) Navigate to backend and apply migrations
 
 ```bash
 cd backend
@@ -121,13 +137,27 @@ python manage.py runserver
 
 Backend will run at `http://localhost:8000/`.
 
+**To stop the server:** Press `Ctrl+C`
+
 ---
 
 ### 3. Setup Frontend (Next.js)
 
+Navigate to the frontend directory:
+
 ```bash
-cd frontend
+cd frontend/notes-frontend
+```
+
+Install dependencies:
+
+```bash
 npm install
+```
+
+Start the development server:
+
+```bash
 npm run dev
 ```
 
@@ -137,84 +167,180 @@ Frontend will run at `http://localhost:3000/`.
 
 ## Running the Project
 
-1. Start the **backend**:
+**Note:** You'll need two separate terminal windows/tabs - one for backend, one for frontend.
 
+### Terminal 1 - Backend
+
+1. Navigate to the project root:
+```bash
+cd Notes_app
+```
+
+2. Activate virtual environment:
+```bash
+source env/bin/activate  # Mac/Linux
+# or
+env\Scripts\activate     # Windows
+```
+
+3. Start backend server:
 ```bash
 cd backend
-source ../env/bin/activate  # if not already activated
 python manage.py runserver
 ```
 
-2. Start the **frontend**:
+Backend runs at `http://localhost:8000/`
 
+---
+
+### Terminal 2 - Frontend
+
+1. Navigate to the frontend directory:
 ```bash
-cd frontend/notes-frontend
+cd Notes_app/frontend/notes-frontend
+```
+
+2. Start frontend server:
+```bash
 npm run dev
 ```
 
-3. Open your browser at [http://localhost:3000](http://localhost:3000)
+Frontend runs at `http://localhost:3000/`
+
+---
+
+3. **Open your browser** at `http://localhost:3000`
 
 ---
 
 ## Folder Structure
 
 ```
-backend/
+Notes_app/
 │
-├── notes_app/                 # Main Django app
-│   ├── migrations/            # Database migrations
-│   ├── models.py              # Models
-│   ├── serializers.py         # DRF serializers
-│   ├── views.py               # API views
-│   ├── urls.py                # App URLs
-│   └── tests.py               # Unit tests
+├── backend/
+│   ├── notes_app/                 # Main Django app
+│   │   ├── migrations/            # Database migrations
+│   │   ├── models.py              # Data models (User, Note, Category)
+│   │   ├── serializers.py         # DRF serializers for API
+│   │   ├── views.py               # API endpoints and business logic
+│   │   ├── urls.py                # App-level URL routing
+│   │   └── tests.py               # Unit tests
+│   │
+│   ├── notes_app_project/         # Django project configuration
+│   │   ├── settings.py            # Project settings and config
+│   │   ├── urls.py                # Root URL configuration
+│   │   └── wsgi.py                # WSGI application entry point
+│   │
+│   ├── requirements.txt           # Python dependencies
+│   └── manage.py                  # Django CLI
 │
-├── notes_app_project/         # Django project configuration
-│   ├── settings.py
-│   ├── urls.py
-│   ├── wsgi.py
-│   └── asgi.py
+├── frontend/
+│   └── notes-frontend/            # Next.js application
+│       ├── pages/                 # Next.js pages (routing)
+│       │   ├── index.js           # Main notes page
+│       │   ├── login.js           # Login page
+│       │   └── register.js        # Registration page
+│       ├── components/            # React components
+│       │   ├── NoteCard.js        # Individual note display
+│       │   ├── NoteForm.js        # Note creation/editing form
+│       │   └── CategoryFilter.js  # Category filtering UI
+│       ├── styles/                # CSS and Tailwind styles
+│       └── package.json           # Node.js dependencies
 │
-└── manage.py                  # Django CLI
-
-frontend/
-├── notes-frontend/            # Next.js frontend
-│   ├── pages/                 # Pages
-│   ├── components/            # React components
-│   └── styles/                # CSS / Tailwind styles
-└── package.json
+└── pictures/                      # Screenshots for documentation
 ```
 
 ---
 
-## Summary & Design Decisions
+## Development Process
 
-* **Backend:** I used Django and Django REST Framework to structure a clean, scalable API. Models were designed to handle notes, categories, and users efficiently. API endpoints follow REST principles for consistency.
-* **Frontend:** Next.js was chosen for a responsive, component-based UI. Pages and components were organized to match the Figma design for simplicity and maintainability.
-* **Integration:** Fetch API is used to interact with the Django backend, handling CSRF tokens for authentication.
-* **Modularity:** Code is split into clear modules, making it easy to extend with features like additional categories or search in the future.
+### Phase 1: Backend Setup
+**Goal:** Create a robust API foundation
 
-**Overall Process:**
-I started by setting up the Django backend and creating the models, serializers, and views. Then I built the Next.js frontend, mapping UI components to backend API endpoints. The app was tested at each stage to ensure smooth integration. Screenshots were taken to verify functionality.
+1. **Database Design**
+   - Designed models for Users, Notes, and Categories
+   - Established relationships (one-to-many between users and notes)
+   - Set up SQLite for development with PostgreSQL migration path
+
+2. **API Development**
+   - Built RESTful endpoints following standard conventions
+   - Implemented serializers for data validation and transformation
+   - Added authentication views (register, login, logout)
+
+3. **Testing**
+   - Tested the API to verify endpoints work correctly
+   
 
 ---
 
-## AI Usage
+### Phase 2: Frontend Development
+**Goal:** Build an intuitive, responsive UI matching the Figma design
 
-**Backend**: All core logic including models, serializers, views, and API endpoints were written by me, referencing official Django documentation and online resources. AI tools (Claude & GPT) were used to suggest minor improvements or optimizations, which I carefully reviewed and adapted before integrating. The main design, architecture, and implementation decisions were fully human-written.
+1. **Component Architecture**
+   - Built React components for the UI
+   - Implemented routing with Next.js pages
 
-**Frontend**: For the frontend, I showed Claude the screenshots from the Figma design to get guidance on structuring and coding Next.js components, and on integrating them with the Django backend. All AI suggestions were carefully reviewed and modified manually to ensure correctness and adherence to the design.
+2. **API Integration**
+   - Connected frontend to backend
+   - Implemented authentication flow
+
+3. **UI/UX Polish**
+   - Created responsive design
 
 ---
 
-## Notes
+## Key Design & Technical Decisions
 
-* **Migrations:** Only include essential migrations. Skip `__pycache__` or the virtual environment folder.
-* **CSRF:** Frontend handles CSRF cookies for Django authentication.
-* **Dependencies:** Ensure `requirements.txt` is up-to-date. If you install new packages:
+### Backend
 
-```bash
-pip freeze > backend/requirements.txt
-```
+- Used Django REST Framework as required for the project
+- SQLite database for development
+- RESTful API endpoints for notes operations
+- User authentication with CSRF protection
 
+### Frontend
 
+- Next.js for the frontend framework
+- Category-based organization (Random Thoughts, School, Personal)
+- Filter functionality to view notes by category
+
+### Integration
+
+- Fetch API to connect frontend with Django backend
+- CSRF token handling for secure requests
+
+---
+
+## AI Tools Usage
+
+I used AI assistants (Claude and ChatGPT) strategically throughout development while maintaining full control over architectural decisions and core implementation.
+
+### Backend Development (20% AI-assisted)
+
+**What I wrote myself:**
+- All core business logic and model design
+- API endpoint structure and serializers
+- Authentication flow implementation
+- Database schema and relationships
+
+**How AI helped:**
+- **Code review and optimization:** Asked Claude to review my serializer code and suggest improvements. It recommended using `read_only_fields` instead of manually excluding fields, which cleaned up my code.
+- **Django best practices:** Used ChatGPT to verify my approach to setting up CORS and CSRF configuration. It suggested using `django-cors-headers` package which I hadn't considered.
+- **Documentation:** Asked AI to suggest docstring formats for my views, which I adapted to match my style.
+
+---
+
+### Frontend Development (60% AI-assisted)
+
+**What I wrote myself:**
+- Overall component structure and page layouts
+- Authentication logic and routing
+- API integration and error handling
+
+**How AI helped:**
+- **UI implementation from Figma:** Showed Claude screenshots of the Figma design and asked for Next.js component structure suggestions. I then manually adapted these to match the exact design specifications.
+- **Fetch API patterns:** Used Claude to suggest best practices for handling async API calls and error states, which I refined based on my specific needs.
+
+**Specific example:**
+I asked Claude: "How should I structure a note card component with title, content, category badge, and action buttons?"
