@@ -262,7 +262,7 @@ export default function Home() {
           <div style={styles.editorCategoryDropdown}>
             <div style={styles.editorCategoryButton} onClick={()=>{ 
               const dropdown=document.getElementById('editorCategoryOptions'); 
-              dropdown.style.display=dropdown.style.display==='none'?'block':'none'; 
+              dropdown.style.display=dropdown.style.display==='none'?'block':'none';  
             }}>
               <span style={{...styles.editorSelectedDot, backgroundColor:getCategoryDotColor(category)}}></span>
               <span style={styles.editorSelectedText}>{category}</span>

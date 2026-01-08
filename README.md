@@ -244,9 +244,9 @@ Notes_app/
 │       │   ├── login.js           # Login page
 │       │   └── register.js        # Registration page
 │       ├── components/            # React components
-│       │   ├── NoteCard.js        # Individual note display
-│       │   ├── NoteForm.js        # Note creation/editing form
-│       │   └── CategoryFilter.js  # Category filtering UI
+│       │   ├── Layout.js        
+│       │   ├── NoteCard.js       
+│       │   
 │       ├── styles/                # CSS and Tailwind styles
 │       └── package.json           # Node.js dependencies
 │
