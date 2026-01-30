@@ -355,37 +355,3 @@ The test suite focuses on validating real-world usage scenarios and enforcing st
 python manage.py test
 ```
 
----
-
-## AI Tools Usage
-
-I used AI assistants (Claude and ChatGPT) strategically throughout development while maintaining full control over architectural decisions and core implementation.
-
-### Backend Development (20% AI-assisted)
-
-**What I wrote myself:**
-- All core business logic and model design
-- API endpoint structure and serializers
-- Authentication flow implementation
-- Database schema and relationships
-
-**How AI helped:**
-- **Code review and optimization:** Asked Claude to review my serializer code and suggest improvements. It recommended using `read_only_fields` instead of manually excluding fields, which cleaned up my code.
-- **Django best practices:** Used ChatGPT to verify my approach to setting up CORS and CSRF configuration. It suggested using `django-cors-headers` package which I hadn't considered.
-- **Documentation:** Asked AI to suggest docstring formats for my views, which I adapted to match my style.
-
----
-
-### Frontend Development (60% AI-assisted)
-
-**What I wrote myself:**
-- Overall component structure and page layouts
-- Authentication logic and routing
-- API integration and error handling
-
-**How AI helped:**
-- **UI implementation from Figma:** Showed Claude screenshots of the Figma design and asked for Next.js component structure suggestions. I then manually adapted these to match the exact design specifications.
-- **Fetch API patterns:** Used Claude to suggest best practices for handling async API calls and error states, which I refined based on my specific needs.
-
-**Specific example:**
-I asked Claude: "How should I structure a note card component with title, content, category badge, and action buttons?"
